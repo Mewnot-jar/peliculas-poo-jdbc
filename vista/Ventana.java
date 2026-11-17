@@ -27,6 +27,13 @@ public class Ventana extends Frame {
         setTitle("Gestión de Películas - MVC");
         setBackground(Color.LIGHT_GRAY);
         setLocationRelativeTo(null);
+        addWindowListener(new WindowAdapter() {
+            @Override 
+            public void windowClosing(WindowEvent e){
+                dispose();
+                System.exit(0);
+            }
+        });
         configurarCamposDeEntradas();
         configurarBotonesDeEventos();
         configurarTablaDeDatos();
@@ -53,6 +60,7 @@ public class Ventana extends Frame {
         add(lblIdPelicula);
 
         txtIdPelicula = new TextField();
+        txtIdPelicula.setEnabled(false);
         txtIdPelicula.setBounds(180, 80, 150, 20);
         add(txtIdPelicula);
 

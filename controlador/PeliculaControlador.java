@@ -49,10 +49,20 @@ public class PeliculaControlador {
     }
 
     private void agregarPelicula(){
+        if (vista.getTxtNombrePelicula().getText().isEmpty() ||
+            vista.getTxtPrecioEntrada().getText().isEmpty() ||
+            vista.getTxtFechaEstreno().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No pueden haber campos vacios.");
+            return;
+        }
+        if (Double.parseDouble(vista.getTxtPrecioEntrada().getText().trim()) <= 0){
+            JOptionPane.showMessageDialog(null, "El precio debe ser mayor a 0.");
+            return;
+        }
         try {
             Pelicula pelicula1 = new Pelicula(
-                Integer.parseInt(vista.getTxtIdPelicula().getText().trim()),
-                vista.getTxtNombrePelicula().getText().trim(),
+                (int) (System.currentTimeMillis() / 1000),
+                vista.getTxtNombrePelicula().getText().trim(), 
                 vista.getChoiceCategoria().getSelectedItem().trim(),
                 Double.parseDouble(vista.getTxtPrecioEntrada().getText().trim()),
                 vista.getTxtFechaEstreno().getText().trim(),
@@ -85,6 +95,20 @@ public class PeliculaControlador {
         }
     }
     private void actualizarPelicula(){
+        if(vista.getTxtIdPelicula().getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Selecciona una pelicula.");
+            return;
+        }
+        if (vista.getTxtNombrePelicula().getText().isEmpty() ||
+            vista.getTxtPrecioEntrada().getText().isEmpty() ||
+            vista.getTxtFechaEstreno().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No pueden haber campos vacios.");
+            return;
+        }
+        if (Double.parseDouble(vista.getTxtPrecioEntrada().getText().trim()) <= 0){
+            JOptionPane.showMessageDialog(null, "El precio debe ser mayor a 0.");
+            return;
+        }
         String query = "UPDATE pelicula SET NombrePelicula = ?, Categoria = ?, PrecioEntrada = ?, FechaEstreno = ?, EnCartelera = ? " +
                         "WHERE idPelicula = ?";
         try(Connection con = Conexion.getConnection();
@@ -134,6 +158,10 @@ public class PeliculaControlador {
         }
     }
     private void eliminarPelicula(){
+        if(vista.getTxtIdPelicula().getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Selecciona una pelicula.");
+            return;
+        }
         String query = "DELETE FROM pelicula WHERE IdPelicula = ?";
         try(Connection con = Conexion.getConnection();
             PreparedStatement ps = con.prepareStatement(query)){
