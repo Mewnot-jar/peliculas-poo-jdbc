@@ -7,9 +7,6 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.SQLException;
 import controlador.Conexion;
-import controlador.PeliculaControlador;
-
-
 
 public class Ventana extends Frame {
 
@@ -22,9 +19,6 @@ public class Ventana extends Frame {
     private JTable tablaRegistrosPelicula;
     private DefaultTableModel modeloTabla;
     private JScrollPane scrollPane;
-    private PeliculaControlador controladorPelicula;
-
-
 
     // Constructor de la ventana
     public Ventana() {
@@ -109,7 +103,6 @@ public class Ventana extends Frame {
         String[] columnas = {"ID", "Nombre", "Categoría", "Precio", "Fecha Estreno", "En Cartelera"};
         modeloTabla = new DefaultTableModel(columnas, 0);
         tablaRegistrosPelicula = new JTable(modeloTabla);
-
         scrollPane = new JScrollPane(tablaRegistrosPelicula);
         scrollPane.setBounds(350, 80, 500, 300);
         add(scrollPane);
@@ -133,12 +126,48 @@ public class Ventana extends Frame {
         btnEliminar.setBounds(180, 270, 100, 30);
         add(btnEliminar);
     }
+    public Button getBtnAgregar(){
+        return btnAgregar;
+    }
     public Button getBtnConsultar(){
         return btnConsultar;
+    }
+    public Button getBtnModificar(){
+        return btnModificar;
+    }
+    public Button getBtnEliminar(){
+        return btnEliminar;
+    }
+    public TextField getTxtIdPelicula(){
+        return txtIdPelicula;
+    }
+    public TextField getTxtNombrePelicula(){
+        return txtNombrePelicula;
+    }
+    public Choice getChoiceCategoria(){
+        return choiceCategoria;
+    }
+    public TextField getTxtPrecioEntrada(){
+        return txtPrecioEntrada;
+    }
+    public TextField getTxtFechaEstreno(){
+        return txtFechaEstreno;
+    }
+    public Checkbox getChkEnCartelera(){
+        return chkEnCartelera;
     }
     public DefaultTableModel getModeloTabla(){
         return modeloTabla;
     }
-
-   
+    public JTable getTablaRegistrosPelicula() {
+        return tablaRegistrosPelicula;
+    }
+    public void limpiarTodo(){
+        txtIdPelicula.setText("");
+        txtNombrePelicula.setText("");
+        choiceCategoria.select(0);
+        txtPrecioEntrada.setText("");
+        txtFechaEstreno.setText("");
+        chkEnCartelera.setState(false);
+    }
 }
