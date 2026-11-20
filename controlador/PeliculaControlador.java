@@ -55,8 +55,14 @@ public class PeliculaControlador {
             JOptionPane.showMessageDialog(null, "No pueden haber campos vacios.");
             return;
         }
-        if (Double.parseDouble(vista.getTxtPrecioEntrada().getText().trim()) <= 0){
-            JOptionPane.showMessageDialog(null, "El precio debe ser mayor a 0.");
+        try {
+            if (Double.parseDouble(vista.getTxtPrecioEntrada().getText().trim()) <= 0){
+                JOptionPane.showMessageDialog(null, "El precio debe ser mayor a 0.");
+                return;
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "El precio no puede ser una letra.");
             return;
         }
         try {
